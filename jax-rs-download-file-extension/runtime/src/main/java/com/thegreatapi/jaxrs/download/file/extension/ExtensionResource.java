@@ -27,7 +27,7 @@ public class ExtensionResource {
     @Path("download")
     @Produces(MediaType.APPLICATION_OCTET_STREAM)
     public Response download() throws IOException {
-        try (InputStream file = getClass().getResourceAsStream(FILE_NAME)) {
+        try (InputStream file = Thread.currentThread().getContextClassLoader().getResourceAsStream(FILE_NAME)) {
             if (file == null) {
                 throw new FileNotFoundException();
             } else {
